@@ -29,10 +29,12 @@ fn part_1(input: Vec<String>) -> i32 {
 
 fn part_2(input: Vec<String>) -> i32 {
     let depths = string_to_int(input);
-    // iterate over 3 away neighbor values and count increases
     let mut count = 0;
+    // Task input is to sum neighboring 3 values and compare to next sliding window.
+    // This is equivalent to comparing the last value of the current window to the
+    // first value of the previous window.
     for i in 0..depths.len() {
-        // First measurement does not have a previous value
+        // Initial window of 3 cannot be compared with prev values
         if i < 3 {
             continue;
         }
@@ -45,11 +47,10 @@ fn part_2(input: Vec<String>) -> i32 {
 
 #[cfg(test)]
 mod tests {
-    use aoc_rust_2021::file_to_vec;
+    use super::*;
     // Part 1
     #[test]
     fn part_1_sample_input() {
-        use crate::part_1;
         let filename = "input/day01_sample.txt".to_string();
         let input = file_to_vec(filename).unwrap();
         let result = part_1(input);
@@ -57,7 +58,6 @@ mod tests {
     }
     #[test]
     fn part_1_full_input() {
-        use crate::part_1;
         let filename = "input/day01.txt".to_string();
         let input = file_to_vec(filename).unwrap();
         let result = part_1(input);
