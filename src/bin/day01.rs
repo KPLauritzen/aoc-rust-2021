@@ -2,16 +2,16 @@
 
 use aoc_rust_2021::{file_to_vec, string_to_int};
 fn main() {
-    let filename = "input/day01.txt".to_string();
+    let filename = "input/day01.txt";
     let input = file_to_vec(filename).unwrap();
-    let part_1_result = part_1(input.clone());
+    let part_1_result = part_1(&input);
     println!("Part 1: {}", part_1_result);
 
-    let part_2_result = part_2(input.clone());
+    let part_2_result = part_2(&input);
     println!("Part 2: {}", part_2_result);
 }
 
-fn part_1(input: Vec<String>) -> i32 {
+fn part_1(input: &Vec<String>) -> i32 {
     let depths = string_to_int(input);
     // iterate over neighboring values and count increases
     let mut count = 0;
@@ -27,7 +27,7 @@ fn part_1(input: Vec<String>) -> i32 {
     count
 }
 
-fn part_2(input: Vec<String>) -> i32 {
+fn part_2(input: &Vec<String>) -> i32 {
     let depths = string_to_int(input);
     let mut count = 0;
     // Task input is to sum neighboring 3 values and compare to next sliding window.
@@ -51,16 +51,16 @@ mod tests {
     // Part 1
     #[test]
     fn part_1_sample_input() {
-        let filename = "input/day01_sample.txt".to_string();
+        let filename = "input/day01_sample.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_1(input);
+        let result = part_1(&input);
         assert_eq!(result, 7);
     }
     #[test]
     fn part_1_full_input() {
-        let filename = "input/day01.txt".to_string();
+        let filename = "input/day01.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_1(input);
+        let result = part_1(&input);
         assert_eq!(result, 1766);
     }
 
@@ -68,17 +68,17 @@ mod tests {
     #[test]
     fn part_2_sample_input() {
         use crate::part_2;
-        let filename = "input/day01_sample.txt".to_string();
+        let filename = "input/day01_sample.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_2(input);
+        let result = part_2(&input);
         assert_eq!(result, 5);
     }
     #[test]
     fn part_2_full_input() {
         use crate::part_2;
-        let filename = "input/day01.txt".to_string();
+        let filename = "input/day01.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_2(input);
+        let result = part_2(&input);
         assert_eq!(result, 1797);
     }
 }

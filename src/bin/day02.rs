@@ -2,12 +2,12 @@
 use aoc_rust_2021::file_to_vec;
 use std::num::ParseIntError;
 fn main() {
-    let filename = "input/day02.txt".to_string();
+    let filename = "input/day02.txt";
     let input = file_to_vec(filename).unwrap();
-    let part_1_result = part_1(input.clone()).unwrap();
+    let part_1_result = part_1(&input).unwrap();
     println!("Part 1: {}", part_1_result);
 
-    let part_2_result = part_2(input).unwrap();
+    let part_2_result = part_2(&input).unwrap();
     println!("Part 2: {}", part_2_result);
 }
 
@@ -22,7 +22,7 @@ enum Action {
     Forward(i32),
 }
 
-fn parse_commands(input: Vec<String>) -> Result<Vec<Action>, ParseIntError> {
+fn parse_commands(input: &Vec<String>) -> Result<Vec<Action>, ParseIntError> {
     let mut actions = Vec::new();
     for i in 0..input.len() {
         let split: Vec<&str> = input[i].split_whitespace().collect();
@@ -39,7 +39,7 @@ fn parse_commands(input: Vec<String>) -> Result<Vec<Action>, ParseIntError> {
     }
     Ok(actions)
 }
-fn part_1(input: Vec<String>) -> Result<i32, ParseIntError> {
+fn part_1(input: &Vec<String>) -> Result<i32, ParseIntError> {
     let actions = parse_commands(input)?;
     let mut pos = Position {
         horizontal: 0,
@@ -62,7 +62,7 @@ struct PositionWithAim {
     aim: i32,
 }
 
-fn part_2(input: Vec<String>) -> Result<i32, ParseIntError> {
+fn part_2(input: &Vec<String>) -> Result<i32, ParseIntError> {
     let actions = parse_commands(input)?;
     let mut pos = PositionWithAim {
         horizontal: 0,
@@ -87,31 +87,31 @@ mod tests {
     // Part 1
     #[test]
     fn part_1_sample_input() {
-        let filename = "input/day02_sample.txt".to_string();
+        let filename = "input/day02_sample.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_1(input).unwrap();
+        let result = part_1(&input).unwrap();
         assert_eq!(result, 150);
     }
     #[test]
     fn part_1_full_input() {
-        let filename = "input/day02.txt".to_string();
+        let filename = "input/day02.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_1(input).unwrap();
+        let result = part_1(&input).unwrap();
         assert_eq!(result, 1524750);
     }
     // Part 2
     #[test]
     fn part_2_sample_input() {
-        let filename = "input/day02_sample.txt".to_string();
+        let filename = "input/day02_sample.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_2(input).unwrap();
+        let result = part_2(&input).unwrap();
         assert_eq!(result, 900);
     }
     #[test]
     fn part_2_full_input() {
-        let filename = "input/day02.txt".to_string();
+        let filename = "input/day02.txt";
         let input = file_to_vec(filename).unwrap();
-        let result = part_2(input).unwrap();
+        let result = part_2(&input).unwrap();
         assert_eq!(result, 1592426537);
     }
 }
